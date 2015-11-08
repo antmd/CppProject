@@ -8,7 +8,6 @@ set(PROJECT_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 if( CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR )
   message(FATAL_ERROR "In-source builds are not allowed.
 Please change to the 'build' directory and run cmake from there.
-Preferably, use the 'core_build' script.
 This process created the file `CMakeCache.txt' and the directory `CMakeFiles'.
 Please delete them.")
 endif()
