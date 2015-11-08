@@ -1,0 +1,3 @@
+#!@BASH_PROGRAM@
+
+@CMAKE_CXX_COMPILER@ -std=c++@CMAKE_CXX_STANDARD@ -stdlib=@CXX_STDLIB@ "$@"

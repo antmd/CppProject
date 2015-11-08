@@ -1,0 +1,11 @@
+*
+!.keep
+!.gitignore
+!CMakeLists.txt
+!patches
+!patches/*
+!build_externals.sh
+!compile-cxx.in
+!cmake
+!cmake/*
+

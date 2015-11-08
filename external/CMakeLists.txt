@@ -1,0 +1,59 @@
+cmake_minimum_required( VERSION 3.2.1 )
+set(EXTRA_SCRIPT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../cmake)
+list(APPEND CMAKE_MODULE_PATH "${EXTRA_SCRIPT_DIR}")
+set(EXTERNAL_CMAKE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+
+include(CheckCXXCompilerFlag)
+
+if(NOT EXISTS ${EXTERNAL_CMAKE_DIR}/CMakeCache.txt)
+    if(NOT WIN32)
+        message(WARNING "No CMake cache found in directory ${EXTERNAL_CMAKE_DIR}: rebuilding externals")
+        execute_process(COMMAND build_externals.sh
+            WORKING_DIRECTORY ${EXTERNAL_CMAKE_DIR}
+            RESULT_VARIABLE rv
+            )
+    else()
+        # TODO: write a Windows BAT file to re-build externals automatically
+        message(FATAL_ERROR "No CMake cache found in directory ${EXTERNAL_CMAKE_DIR}: please build 'external'")
+    endif()
+endif()
+
+set(EXTERNAL_LIBS ${EXTERNAL_CMAKE_DIR}/lib)
+include_directories(${EXTERNAL_CMAKE_DIR}/include SYSTEM)
+load_cache(${EXTERNAL_CMAKE_DIR} READ_WITH_PREFIX "" 
+    CPPFORMAT_LIBRARY
+    POLYPARTITION_LIBRARY
+    CASABLANCA_LIBRARY
+    CASABLANCA_UTILITIES_LIBRARY
+    LIBGEXF_LIBRARY
+    POLYPARTITION_LIBRARY
+    GFLAGS_LIBRARY
+    GLOG_LIBRARY
+    GTEST_LIBRARY
+    GTEST_MAIN_LIBRARY
+    GMOCK_LIBRARY
+    GMOCK_MAIN_LIBRARY
+    )
+
+add_library(CppFormat STATIC IMPORTED GLOBAL)
+set_target_properties(CppFormat PROPERTIES IMPORTED_LOCATION ${EXTERNAL_LIBS}/${CPPFORMAT_LIBRARY})
+add_library(PolyPartition STATIC IMPORTED GLOBAL)
+set_target_properties(PolyPartition PROPERTIES IMPORTED_LOCATION ${EXTERNAL_LIBS}/${POLYPARTITION_LIBRARY})
+add_library(Casablanca STATIC IMPORTED GLOBAL)
+set_target_properties(Casablanca PROPERTIES IMPORTED_LOCATION ${EXTERNAL_LIBS}/${CASABLANCA_LIBRARY})
+add_library(CasablancaUtilities STATIC IMPORTED GLOBAL)
+set_target_properties(CasablancaUtilities PROPERTIES IMPORTED_LOCATION ${EXTERNAL_LIBS}/${CASABLANCA_UTILITIES_LIBRARY})
+add_library(LibGEXF STATIC IMPORTED GLOBAL)
+set_target_properties(LibGEXF PROPERTIES IMPORTED_LOCATION ${EXTERNAL_LIBS}/${LIBGEXF_LIBRARY})
+add_library(GFlags STATIC IMPORTED GLOBAL)
+set_target_properties(GFlags PROPERTIES IMPORTED_LOCATION ${EXTERNAL_LIBS}/${GFLAGS_LIBRARY})
+add_library(GLog STATIC IMPORTED GLOBAL)
+set_target_properties(GLog PROPERTIES IMPORTED_LOCATION ${EXTERNAL_LIBS}/${GLOG_LIBRARY})
+add_library(GTest STATIC IMPORTED GLOBAL)
+set_target_properties(GTest PROPERTIES IMPORTED_LOCATION ${EXTERNAL_LIBS}/${GTEST_LIBRARY})
+add_library(GTestMain STATIC IMPORTED GLOBAL)
+set_target_properties(GTestMain PROPERTIES IMPORTED_LOCATION ${EXTERNAL_LIBS}/${GTEST_MAIN_LIBRARY})
+add_library(GMock STATIC IMPORTED GLOBAL)
+set_target_properties(GMock PROPERTIES IMPORTED_LOCATION ${EXTERNAL_LIBS}/${GMOCK_LIBRARY})
+add_library(GMockMain STATIC IMPORTED GLOBAL)
+set_target_properties(GMockMain PROPERTIES IMPORTED_LOCATION ${EXTERNAL_LIBS}/${GMOCK_MAIN_LIBRARY})

@@ -1,0 +1,8 @@
+
+#GitHub(xcconfigs jspahrsummers/xcconfigs ec5753493605deed7358dec5f9260f503d3ed650)
+#GitHub(RxSwift antmd/RxSwift 2.0.0-alpha.4)
+#ZipFile(Firebase https://cdn.firebase.com/ObjC/Firebase.framework-LATEST.zip)
+#GitHub(FirebaseUI antmd/FirebaseUI-iOS )
+#GitHub(TPKeyboardAvoiding antmd/TPKeyboardAvoiding)
+#GitHub(FirebaseRxSwiftExtensions antmd/FirebaseRxSwiftExtensions 2.0.0.3)
+Download(Catch https://raw.githubusercontent.com/philsquared/Catch/master/single_include/catch.hpp include/catch.hpp)
