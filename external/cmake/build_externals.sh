@@ -13,18 +13,7 @@
 
 set -o nounset                              # Treat unset variables as an error
 
-# Get the directory this script lives in, accounting for symlinks to the script
-if [ -L "$0" ]; then
-  pushd "$(dirname $0)/$(dirname $(readlink "$0"))" >/dev/null
-else
-  pushd $(dirname "$0") >/dev/null
-fi
-readonly ScriptDir=$(pwd)
-popd >/dev/null
-
-
+ScriptDir="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" && pwd  )"
 cd "$ScriptDir"
 
-
-cd cmake
 cmake -G'Unix Makefiles' && make -j8 AllExternals
