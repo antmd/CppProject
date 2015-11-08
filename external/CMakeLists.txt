@@ -18,8 +18,8 @@ if(NOT EXISTS ${EXTERNAL_CMAKE_DIR}/CMakeCache.txt)
     endif()
 endif()
 
-set(EXTERNAL_LIBS ${EXTERNAL_CMAKE_DIR}/lib)
-include_directories(${EXTERNAL_CMAKE_DIR}/include SYSTEM)
+set(EXTERNAL_LIBS ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include SYSTEM)
 load_cache(${EXTERNAL_CMAKE_DIR} READ_WITH_PREFIX "" 
     CPPFORMAT_LIBRARY
     POLYPARTITION_LIBRARY
